@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}User EMS {% endblock %}
+{% block info %}
+<ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow"  role="button" href="{% url 'login' %}">Logout</a>
+{% endblock %}
+{% block body %}
+    <div class="row pf" id = "pf">
+        <div class="rtop">
+            <div class="pimage">
+                <img src="{{ user.image.url }}" alt="">
+            
+            </div>
+            <div class="pt">
+                <h2>{{ user.full_name }}</h2>
+                <h3>{{ user.email }}</h3>
+            </div>
+            <img src="{% static 'edit.svg' %}" id = "edit" alt="">
+        </div>
+        <div class="pother">
+            <p class="g">Name</p>
+            <p class="a">{{ user.full_name }}</p>
+        </div>
+        <div class="pother">
+            <p class="g">Email</p>
+            <p class="a">{{ user.email }}</p>
+        </div>
+        <div class="pother">
+            <p class="g">Username</p>
+            <p class="a">{{ user.username }}</p>
+        </div>
+        <div class="pother">
+            <p class="g">Date Of Birth</p>
+            <p class="a">{{ user.birth_date }}</p>
+        </div>
+        <div class="pother">
+            <p class="g">Level</p>
+            {% if user.admin %}
+                <p class="a">Admin</p>
+            {% else %}
+                <p class="a">Employee</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row ef" id="hid">
+        <div class="rtop">
+            <div class="pimage">
+                <img src="{{ user.image.url }}" alt="Profile Image" id="profile-img">
+                <div class="edit-icon" onclick="triggerFileInput()">
+                    <i class="fas fa-edit"></i> 
+                </div>
+                <input type="file" id="image-upload" style="display: none;" onchange="handleImageChange()">
+            </div>
+            <div class="pt">
+                <h2>{{ user.full_name }}</h2>
+                <h3>{{ user.email }}</h3>
+            </div>
+            
+        </div>
+        <div class="pother">
+            <p class="g">Name</p>
+            <input type="text" id = "name" value = "{{ user.full_name }}">
+        </div>
+        <div class="pother">
+            <p class="g">Email</p>
+            <input type="text" id = "email"value = "{{ user.email }}">
+        </div>
+        <div class="pother">
+            <p class="g">Username</p>
+            <input type="text" id = "username" value = "{{ user.username }}">
+        </div>
+        <div class="pother">
+            <p class="g">Date Of Birth</p>
+            <input type="date" id = "birth_date" value = "{{ user.birth_date|date:'Y-m-d' }}">
+        </div>
+        <div class="pother">
+            <p class="g">Level</p>
+            {% if user.is_admin %}
+                <p class="a">Admin</p>
+            {% else %}
+                <p class="a">Employee</p>
+            {% endif %}
+        </div>
+
+        
+    </div>
+    <div class="button">
+        <button  type="submit" id = "save">Save</button>
+    </div>
+   
+    <img src="{% static 'loader.gif' %}" id = "timer" alt="">
+{% endblock %}
+ 
+   
+
