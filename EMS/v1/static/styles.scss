@@ -2,6 +2,12 @@ $different:lightgray;
 body{
     position:relative;
 }
+#mainNav{
+    position:fixed;
+    width:100%;
+    z-index:1;
+    background: #fff;
+}
 input[type="file"] {
     display: none;
 }
@@ -276,4 +282,23 @@ input[type="file"] {
         
     }
 }
-
+.pagination{
+    width:100%;
+    span{
+        padding:10px;
+        a{
+            cursor:pointer
+        }
+       
+    }
+    >span{
+        padding:8px;
+        border:1px solid lightgray;
+        border-radius:5px;
+        margin:2% auto;
+        &:hover{
+            cursor:default;
+           
+        }
+    }
+}

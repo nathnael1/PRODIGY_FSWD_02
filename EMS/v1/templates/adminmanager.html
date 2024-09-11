@@ -41,20 +41,26 @@
 
 <div class="pagination">
     <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1"> 1</a>
-            <a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-chevron-left"></i></a>
+        {% if page_obj.has_previous %} 
+            <span><a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a></span>
         {% endif %}
 
-        <span class="current">
-             {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+       <span>
+        {{ page_obj.number }} of 
+        {% if page_obj.paginator.num_pages != page_obj.number %}
+        <a href="?page={{ page_obj.paginator.num_pages }}"> {{ page_obj.paginator.num_pages }}</a>
+        {% else %}
+        {{ page_obj.paginator.num_pages }}
+        {% endif %}
         </span>
 
+
+       
+
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-chevron-right"></i></a>
-            {% if page_obj.paginator.num_pages > 8 %}
-                <a href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i> &raquo;</a>
-            {% endif %}
+            <span>
+                <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-double-right"></i></a>
+            </span>
            
         {% endif %}
     </span>

@@ -2,6 +2,13 @@ body {
   position: relative;
 }
 
+#mainNav {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  background: #fff;
+}
+
 input[type=file] {
   display: none;
 }
@@ -272,4 +279,23 @@ input[type=file] {
 }
 .person:hover {
   background-color: #f0f0f0;
+}
+
+.pagination {
+  width: 100%;
+}
+.pagination span {
+  padding: 10px;
+}
+.pagination span a {
+  cursor: pointer;
+}
+.pagination > span {
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 2% auto;
+}
+.pagination > span:hover {
+  cursor: default;
 }/*# sourceMappingURL=styles.css.map */
