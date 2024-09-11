@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}User Edit {% endblock %}
+{% block info %}
+<ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow"  role="button" href="{% url 'login' %}">Logout</a>
+{% endblock %}
+{% block body %}
+<div class="row ef" >
+
+    <div class="rtop">
+        <div class="pimage">
+            <img src="{{ user.image.url }}" alt="Profile Image" id="profile-img">
+            <div class="edit-icon" onclick="triggerFileInput()">
+                <i class="fas fa-edit"></i> 
+            </div>
+            <input type="file" id="image-upload" style="display: none;" onchange="handleImageChange()">
+        </div>
+        <div class="pt">
+            <h2>{{ user.full_name }}</h2>
+            <h3>{{ user.email }}</h3>
+        </div>
+        
+    </div>
+    <div class="pother">
+        <p class="g">Name</p>
+        <input type="text" id = "name" value = "{{ user.full_name }}">
+    </div>
+    <div class="pother">
+        <p class="g">Email</p>
+        <input type="text" id = "email"value = "{{ user.email }}">
+    </div>
+    <div class="pother">
+        <p class="g">Username</p>
+        <input type="text" id = "username" value = "{{ user.username }}">
+    </div>
+    <div class="pother">
+        <p class="g">Date Of Birth</p>
+        <input type="date" id = "birth_date" value = "{{ user.birth_date|date:'Y-m-d' }}">
+    </div>
+    <div class="pother">
+        <p class="g">Level</p>
+        {% if user.is_admin %}
+            <p class="a">Admin</p>
+        {% else %}
+            <p class="a">Employee</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'adminmanager' %}" id = "x">
+        <i class="fas fa-times"></i>
+    </a>
+</div>
+<div class="button">
+    <button  type="submit" id = "psave" data-username = "{{user.username}}">Save</button>
+</div>
+
+
+<img src="{% static 'loader.gif' %}" id = "timer" alt="">
+<script src="{% static 'pedit.js' %}"></script>
+{% endblock %}

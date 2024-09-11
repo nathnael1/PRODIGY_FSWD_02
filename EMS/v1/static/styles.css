@@ -38,6 +38,7 @@ input[type=file] {
   border-radius: 20px;
   height: -moz-fit-content;
   height: fit-content;
+  position: relative;
 }
 .pf .rtop {
   border-bottom: 0.5px solid lightgray;
@@ -88,7 +89,7 @@ input[type=file] {
   width: 70%;
   margin: 1% auto;
 }
-.button #save {
+.button #save, .button #psave {
   display: block;
   background-color: #0069d9;
   color: #fff;
@@ -96,7 +97,7 @@ input[type=file] {
   border-radius: 5px;
   border: none;
 }
-.button #save:hover {
+.button #save:hover, .button #psave:hover {
   cursor: pointer;
 }
 
@@ -107,6 +108,7 @@ input[type=file] {
   background-color: #fff;
   padding: 10px;
   border-radius: 20px;
+  position: relative;
   height: -moz-fit-content;
   height: fit-content;
 }
@@ -268,10 +270,10 @@ input[type=file] {
   gap: 5px;
   align-items: center;
 }
-.person .manage #pedit {
+.person .manage .pedit {
   color: #0069d9;
 }
-.person .manage #pshow {
+.person .manage .pshow {
   color: rgb(131, 72, 5);
 }
 .person .manage:hover {
@@ -298,4 +300,71 @@ input[type=file] {
 }
 .pagination > span:hover {
   cursor: default;
+}
+
+#popup {
+  background-color: #0069d9;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 40%;
+  position: absolute;
+  padding: 10px;
+  height: 200px;
+  top: 20%;
+  left: 30%;
+  z-index: 2;
+}
+#popup p {
+  text-align: center;
+  color: #fff;
+}
+#popup button {
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  display: block;
+  width: 80px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.disabled {
+  display: none;
+}
+
+#confirm {
+  width: 40%;
+  position: absolute;
+  border-radius: 20px;
+  top: 10%;
+  left: 30%;
+  padding: 10px;
+  z-index: 2;
+}
+
+.ef {
+  position: relative;
+}
+
+#x {
+  position: absolute;
+  left: 90%;
+  top: 2%;
+  z-index: 1000;
+}
+
+#x i {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.head {
+  color: #0069d9;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer {
+  border-top: 1px solid lightgray;
 }/*# sourceMappingURL=styles.css.map */

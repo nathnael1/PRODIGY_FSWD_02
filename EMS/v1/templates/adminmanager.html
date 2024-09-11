@@ -1,69 +1,74 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block title %}User EMS {% endblock %}
+{% block title %}Admin manager{% endblock %}
 {% block info %}
 <ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow"  role="button" href="{% url 'login' %}">Logout</a>
 {% endblock %}
 {% block body %}
-<div id="search" class = "mb-3">
-    <img src="{% static 'search.svg' %}" alt="">
-    <input type="text" id="search" autocomplete="off" placeholder="Search">
-</div>
-<div class="status">
-    <p>Name</p>
-    <p>Email</p>
-    <p>Level</p>
-    <p></p>
-</div>
-{% for user in page_obj %}
-<div class="person">
-    <div class="pimage">
-        <img src="{{ user.image.url }}" alt="">
-        <p>{{ user.full_name }}</p>
+<div id="allUser">
+<h2 class= "head">Employment managment system</h2>
+    <div class="status">
+        <p>Name</p>
+        <p>Email</p>
+        <p>Level</p>
+        <p></p>
+    </div>
+    {% for user in page_obj %}
+    <div class="person">
+        <div class="pimage">
+            <img src="{{ user.image.url }}" alt="">
+            <p>{{ user.full_name }}</p>
+        </div>
+        
+        <p>{{ user.email }}</p>
+       
+        {% if user.admin %}
+            <p>Admin</p>
+        {% else %}
+            <p>Employee</p>
+        {% endif %}
+        <div class="manage">
+
+            <i class="fas fa-edit pedit" data-username="{{ user.username }}"></i>
+            <i  class="fas fa-trash-alt pdelete" data-username="{{ user.username }}"></i>
+            <i  class="fas fa-eye pshow" data-username="{{ user.username }}"></i>
+        </div>
     </div>
     
-    <p>{{ user.email }}</p>
-   
-    {% if user.admin %}
-        <p>Admin</p>
-    {% else %}
-        <p>Employee</p>
-    {% endif %}
-    <div class="manage">
-        <i id = "pedit" class="fas fa-edit"></i>
-        <i id = "premove" class="fas fa-trash-alt"></i>
-        <i id = "pshow" class="fas fa-eye"></i>
-    </div>
-</div>
-
-{% endfor %}
-
-
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %} 
-            <span><a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a></span>
-        {% endif %}
-
-       <span>
-        {{ page_obj.number }} of 
-        {% if page_obj.paginator.num_pages != page_obj.number %}
-        <a href="?page={{ page_obj.paginator.num_pages }}"> {{ page_obj.paginator.num_pages }}</a>
-        {% else %}
-        {{ page_obj.paginator.num_pages }}
-        {% endif %}
-        </span>
-
-
-       
-
-        {% if page_obj.has_next %}
-            <span>
-                <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-double-right"></i></a>
+    {% endfor %}
+    
+    
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %} 
+                <span><a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a></span>
+            {% endif %}
+    
+           <span>
+            {{ page_obj.number }} of 
+            {% if page_obj.paginator.num_pages != page_obj.number %}
+            <a href="?page={{ page_obj.paginator.num_pages }}"> {{ page_obj.paginator.num_pages }}</a>
+            {% else %}
+            {{ page_obj.paginator.num_pages }}
+            {% endif %}
             </span>
+    
+    
            
-        {% endif %}
-    </span>
+    
+            {% if page_obj.has_next %}
+                <span>
+                    <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-double-right"></i></a>
+                </span>
+               
+            {% endif %}
+        </span>
+    </div> 
 </div>
-
+<div id="popup" class = "disabled">
+    <p id = "warning"></p>
+    <button id = "cwarning" class="btn btn-danger">Delete</button>
+</div>
+<img src="{% static 'check02.gif' %}" class = "disabled" alt="" id="confirm">
+<script src="{% static 'icons.js' %}"></script>
 {% endblock %}

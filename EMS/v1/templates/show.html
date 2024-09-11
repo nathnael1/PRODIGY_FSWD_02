@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}User Show {% endblock %}
+{% block info %}
+<ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow"  role="button" href="{% url 'login' %}">Logout</a>
+{% endblock %}
+{% block body %}
+
+<div class="row pf" id = "pf">
+    <div class="rtop">
+        <div class="pimage">
+            <img src="{{ user.image.url }}" alt="">
+        
+        </div>
+        <div class="pt">
+            <h2>{{ user.full_name }}</h2>
+            <h3>{{ user.email }}</h3>
+        </div>
+    </div>
+    <div class="pother">
+        <p class="g">Name</p>
+        <p class="a">{{ user.full_name }}</p>
+    </div>
+    <div class="pother">
+        <p class="g">Email</p>
+        <p class="a">{{ user.email }}</p>
+    </div>
+    <div class="pother">
+        <p class="g">Username</p>
+        <p class="a">{{ user.username }}</p>
+    </div>
+    <div class="pother">
+        <p class="g">Date Of Birth</p>
+        <p class="a">{{ user.birth_date }}</p>
+    </div>
+    <div class="pother">
+        <p class="g">Level</p>
+        {% if user.admin %}
+            <p class="a">Admin</p>
+        {% else %}
+            <p class="a">Employee</p>
+        {% endif %}
+    </div>
+    <a href="{% url 'adminmanager' %}" id = "x">
+        <i class="fas fa-times"></i>
+    </a>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse,HttpResponseRedirect,HttpResponseForbidden
 from django.contrib.auth import authenticate, login as auth_login,logout
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.http import Http404
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
@@ -123,7 +124,52 @@ def edit(request):
         return JsonResponse({"error": "Invalid request method"}, status=400)
 def adminmanager(request):
     user_list = User.objects.all().order_by('-id')
-    paginator = Paginator(user_list, 2)  
+    paginator = Paginator(user_list, 10)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'adminmanager.html', {'page_obj': page_obj})
+@csrf_exempt
+def editUser(request, username):
+    if not request.user.admin:
+        return JsonResponse({"error": "Unauthorized"}, status=403)
+    try:
+         user = get_object_or_404(User, username=username)
+    except User.DoesNotExist:
+        return HttpResponseForbidden("User does not exist")
+    if request.method == "POST":
+        data = request.POST
+        full_name = data.get("full_name")
+        email = data.get("email")
+        username = data.get("username")
+        birth_date = data.get("birth_date")
+        image = request.FILES.get("image")
+        if full_name:
+            user.full_name = full_name
+        if email:
+            user.email = email
+        if birth_date:
+            try:
+                birth_date = datetime.strptime(birth_date, "%Y-%m-%d").date()
+                user.birth_date = birth_date
+            except ValueError:
+                return JsonResponse({"error": "Invalid date format. Expected format: 'YYYY-MM-DD'."})
+        if username:
+            user.username = username
+        if image:
+            user.image = image
+        user.save()
+        return JsonResponse({"success": "Profile updated successfully"})
+    return render(request, "edit.html", {"user": user})
+def show(request,username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        messages.error(request, "User does not exist")
+    return render(request,"show.html",{"user":user})
+def delete(request,username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        messages.error(request, "User does not exist")
+    user.delete()
+    return HttpResponseRedirect(reverse("adminmanager"))

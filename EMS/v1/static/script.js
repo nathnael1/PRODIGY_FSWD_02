@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
     adminShower();
 
 
@@ -64,6 +63,7 @@ function triggerFileInput() {
 }
 let pfInfo = document.getElementById('pf');
 let save = document.getElementById('save');
+
 let edit = document.getElementById('edit');
 let image = document.getElementById('image-upload');
 let full_name = document.getElementById('name');
@@ -72,15 +72,18 @@ let username = document.getElementById('username');
 let birth_date = document.getElementById('birth_date');
 let hid = document.getElementById("hid")
 let timer = document.getElementById("timer")
+
 timer.style.display = "none"
+
 save.style.display = "none"
 hid.style.display = "none"
 edit.addEventListener('click', function() {
-edit.style.display = "none";
-save.style.display = "block";
-pfInfo.style.display = "none"
-hid.style.display = "block";
+    edit.style.display = "none";
+    save.style.display = "block";
+    pfInfo.style.display = "none"
+    hid.style.display = "block";
 })
+
 save.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -123,4 +126,5 @@ save.addEventListener('click', function(event) {
     .catch(err => {
         console.log(err);
     });
+    
 });
