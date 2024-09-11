@@ -196,4 +196,80 @@ input[type=file] {
   text-align: left;
   display: block;
   margin: 5px;
+}
+
+#search {
+  width: 100%;
+  margin: 0 auto;
+  padding: 5px;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: flex;
+}
+#search input {
+  border: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 1%;
+}
+#search input:focus {
+  border: none;
+  outline: none;
+}
+#search img {
+  width: 20px;
+  margin-left: 15px;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.status p {
+  text-align: left;
+  opacity: 0.5;
+  width: 25%;
+}
+
+.person {
+  display: flex;
+  padding: 5px;
+  border-bottom: 1px solid lightgray;
+  justify-content: space-between;
+  width: 100%;
+}
+.person > p {
+  text-align: left;
+  width: 25%;
+}
+.person .pimage {
+  width: 25%;
+  display: flex;
+  gap: 20px;
+}
+.person .pimage img {
+  width: 15%;
+  border-radius: 50%;
+}
+.person .manage {
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  align-items: center;
+}
+.person .manage #pedit {
+  color: #0069d9;
+}
+.person .manage #pshow {
+  color: rgb(131, 72, 5);
+}
+.person .manage:hover {
+  cursor: pointer;
+}
+.person:hover {
+  background-color: #f0f0f0;
 }/*# sourceMappingURL=styles.css.map */

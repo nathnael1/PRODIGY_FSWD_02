@@ -7,8 +7,8 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from django.contrib import messages
+from django.core.paginator import Paginator
 # Create your views here.
-sucess = ""
 def index(request):
     if request.user.is_authenticated:
         try:
@@ -121,4 +121,9 @@ def edit(request):
         return JsonResponse({"success": "Profile updated successfully"})
     else:
         return JsonResponse({"error": "Invalid request method"}, status=400)
-        
+def adminmanager(request):
+    user_list = User.objects.all()
+    paginator = Paginator(user_list, 10)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'adminmanager.html', {'page_obj': page_obj})

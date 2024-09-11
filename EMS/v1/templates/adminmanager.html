@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}User EMS {% endblock %}
+{% block info %}
+<ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow"  role="button" href="{% url 'login' %}">Logout</a>
+{% endblock %}
+{% block body %}
+<div id="search" class = "mb-3">
+    <img src="{% static 'search.svg' %}" alt="">
+    <input type="text" id="search" autocomplete="off" placeholder="Search">
+</div>
+<div class="status">
+    <p>Name</p>
+    <p>Email</p>
+    <p>Level</p>
+    <p></p>
+</div>
+{% for user in page_obj %}
+<div class="person">
+    <div class="pimage">
+        <img src="{{ user.image.url }}" alt="">
+        <p>{{ user.full_name }}</p>
+    </div>
+    
+    <p>{{ user.email }}</p>
+   
+    {% if user.admin %}
+        <p>Admin</p>
+    {% else %}
+        <p>Employee</p>
+    {% endif %}
+    <div class="manage">
+        <i id = "pedit" class="fas fa-edit"></i>
+        <i id = "premove" class="fas fa-trash-alt"></i>
+        <i id = "pshow" class="fas fa-eye"></i>
+    </div>
+</div>
+
+{% endfor %}
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1"> 1</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-chevron-left"></i></a>
+        {% endif %}
+
+        <span class="current">
+             {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-chevron-right"></i></a>
+            {% if page_obj.paginator.num_pages > 8 %}
+                <a href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i> &raquo;</a>
+            {% endif %}
+           
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
