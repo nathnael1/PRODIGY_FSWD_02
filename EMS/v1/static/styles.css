@@ -36,6 +36,7 @@ input[type=file] {
   background-color: #fff;
   padding: 10px;
   border-radius: 20px;
+  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   position: relative;
@@ -43,6 +44,7 @@ input[type=file] {
 .pf .rtop {
   border-bottom: 0.5px solid lightgray;
   padding: 5px;
+  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   width: 80%;
@@ -109,12 +111,14 @@ input[type=file] {
   padding: 10px;
   border-radius: 20px;
   position: relative;
+  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
 .ef .rtop {
   border-bottom: 0.5px solid lightgray;
   padding: 5px;
+  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   width: 80%;
@@ -211,6 +215,7 @@ input[type=file] {
   width: 100%;
   margin: 0 auto;
   padding: 5px;
+  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   border: 1px solid lightgray;
@@ -260,8 +265,9 @@ input[type=file] {
   gap: 20px;
 }
 .person .pimage img {
-  width: 15%;
-  border-radius: 50%;
+  width: 50px;
+  height: 60px;
+  border-radius: 40px;
 }
 .person .manage {
   width: 25%;
@@ -343,7 +349,7 @@ input[type=file] {
   z-index: 2;
 }
 
-.ef {
+.ef, .arow {
   position: relative;
 }
 
@@ -354,7 +360,19 @@ input[type=file] {
   z-index: 1000;
 }
 
+#ax {
+  position: absolute;
+  left: 70%;
+  top: 0;
+  z-index: 1000;
+}
+
 #x i {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+#ax i {
   font-size: 2rem;
   cursor: pointer;
 }
@@ -365,6 +383,52 @@ input[type=file] {
   margin-bottom: 10px;
 }
 
+#au {
+  display: block;
+  width: 50%;
+  margin: 2% auto;
+  background-color: #0069d9;
+  color: #fff;
+  border-radius: 5px;
+  text-transform: capitalize;
+  padding: 5px;
+  text-align: center;
+  height: 40px;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: width 1s, height 1s, font-size 1s;
+}
+
+#au:hover {
+  -webkit-animation: anime 1s forwards;
+          animation: anime 1s forwards;
+  cursor: pointer;
+}
+
+@-webkit-keyframes anime {
+  from {
+    width: 50%;
+    height: 40px;
+  }
+  to {
+    width: 52%;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+}
+
+@keyframes anime {
+  from {
+    width: 50%;
+    height: 40px;
+  }
+  to {
+    width: 52%;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+}
 footer {
   border-top: 1px solid lightgray;
-}/*# sourceMappingURL=styles.css.map */
+}
+/*# sourceMappingURL=styles.css.map */

@@ -123,11 +123,63 @@ def edit(request):
     else:
         return JsonResponse({"error": "Invalid request method"}, status=400)
 def adminmanager(request):
-    user_list = User.objects.all().order_by('-id')
-    paginator = Paginator(user_list, 10)  
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'adminmanager.html', {'page_obj': page_obj})
+    if request.user.is_authenticated:
+        if request.user.admin:
+            user_list = User.objects.all().order_by('-id')
+            paginator = Paginator(user_list, 10)  
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            return render(request, 'adminmanager.html', {'page_obj': page_obj})
+        else:
+            return HttpResponseRedirect(reverse("index"))
+
+    else:
+        return HttpResponseRedirect(reverse("index"))
+
+def addUser(request):
+    if request.user.admin:
+        if request.method == "POST":
+            username = request.POST.get("username")
+            full_name = request.POST.get("fullName")
+            password = request.POST.get("password")
+            password_repeat = request.POST.get("password_repeat")
+            email = request.POST.get("email")
+            image = request.FILES.get("image")
+            birth_date = request.POST.get("date")
+            admin_key = request.POST.get("adminKey")
+            user = User.objects.filter(username=username).first()
+            errors = {}
+
+            if user:
+                errors["error"] = "User already exists"
+            elif not all([username, full_name, password, email, image, birth_date]):
+                errors["error"] = "All fields are required"
+            elif len(password) < 8:
+                errors["error"] = "Password must be at least 8 characters"
+            elif password != password_repeat:
+                errors["error"] = "Passwords do not match"
+
+            if errors:
+                return render(request, 'signup.html', {"errors": errors})
+            if admin_key == "1234":
+                is_admin = True
+            if not admin_key:
+                is_admin = False
+            user = User(
+                username = username,
+                full_name = full_name,
+                email = email,
+
+                birth_date = birth_date,
+                admin = is_admin
+            )
+            user.image = image
+            user.set_password(password)
+            user.save()
+            return HttpResponseRedirect(reverse("adminmanager"))
+        return render(request,'add.html')
+    else:
+        return HttpResponseRedirect(reverse("index"))
 @csrf_exempt
 def editUser(request, username):
     if not request.user.admin:
@@ -171,5 +223,7 @@ def delete(request,username):
         user = User.objects.get(username=username)
     except User.DoesNotExist:
         messages.error(request, "User does not exist")
+    if user == request.user:
+        return HttpResponseForbidden("You cannot delete yourself")
     user.delete()
     return HttpResponseRedirect(reverse("adminmanager"))

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Add User EMS {% endblock %}
+{% block info %}
+<ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow" id = "tabb" role="button" href="#">Admin adder</a>
+{% endblock %}
+{% block body %}
+    <div class="row arow justify-content-center">
+        <div class="col-md-5 col-xl-4 text-center">
+            <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1 head"><strong id = "infoo">Add: User</strong></span></h2>
+            <form method="post" data-bs-theme="light" class = "text-center" action = "{% url 'addUser' %}" enctype = "multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3"><input class="shadow-sm form-control" type="text" name="fullName" placeholder="Full Name"></div>
+                <div class="mb-3"><input class="shadow-sm form-control" type="text" name="username" placeholder="UserName"></div>
+                <div class="mb-3"><input class="shadow-sm form-control" type="email" name="email" placeholder="Email"></div>
+                <div class="mb-3"><input class="shadow-sm form-control" type="date" name="date" placeholder="Date of Birth"></div>
+                <div class="mb-3"><input class="shadow-sm form-control" id = "key" type="password" name="adminKey" placeholder="admin key"></div>
+                <div class="mb-3"><input class="shadow-sm form-control" type="password" name="password" placeholder="Password"></div>
+                <div class="mb-3"><input class="shadow-sm form-control" type="password" name="password_repeat" placeholder="Repeat Password"></div>
+                <div class="file-upload-container">
+                    <label for="file-upload" class="custom-file-upload">
+                        Image Upload
+                    </label>
+                    <span id="file-upload-filename"></span>
+                    <input id="file-upload" name = "image" type="file" onchange="displayFileName()" />
+                </div>
+                <span class="error">
+                    {%if errors %}
+                    {{errors.error}}
+                    {% endif %}
+                </span>
+                <span class="success">
+                    {%if success %}
+                    {% endif %}
+                </span>
+                <div class="mb-5"><button class="btn btn-primary shadow" type="submit">Create account</button></div>
+            </form>
+        </div>
+        <a href="{% url 'adminmanager' %}" id = "ax">
+            <i class="fas fa-times"></i>
+        </a>
+    </div>
+    <script >
+        let tabb = document.getElementById('tabb');
+        let infoo = document.getElementById('infoo');
+        tabb.addEventListener('click', function() {
+    if (tabb.innerHTML === "Admin adder") {
+        key.style.display = "block";
+        tabb.innerHTML = "User adder";
+        infoo.innerHTML = "Add: Admin";
+    } else if (tabb.innerHTML === "User adder") {
+        key.style.display = "none";
+        infoo.innerHTML = "Add: User";
+        tabb.innerHTML = "Admin adder";
+        }
+    });
+    </script>
+{% endblock %}

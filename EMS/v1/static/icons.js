@@ -6,6 +6,7 @@ let popup = document.getElementById("popup");
 let warning = document.getElementById("warning");
 let cwarning = document.getElementById("cwarning");
 let confirm = document.getElementById("confirm");
+
 let cache = ""
 popup.style.display = "none"
 confirm.style.display = "none"

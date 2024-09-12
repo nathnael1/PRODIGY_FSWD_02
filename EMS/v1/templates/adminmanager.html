@@ -6,7 +6,9 @@
 {% endblock %}
 {% block body %}
 <div id="allUser">
+    
 <h2 class= "head">Employment managment system</h2>
+<a href="{% url 'addUser' %}" id = "au">add user</a>
     <div class="status">
         <p>Name</p>
         <p>Email</p>
@@ -70,5 +72,6 @@
     <button id = "cwarning" class="btn btn-danger">Delete</button>
 </div>
 <img src="{% static 'check02.gif' %}" class = "disabled" alt="" id="confirm">
+
 <script src="{% static 'icons.js' %}"></script>
 {% endblock %}

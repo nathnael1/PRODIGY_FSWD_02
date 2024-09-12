@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let tab = document.getElementById('tab');
     let info = document.getElementById('info');
 
+
     
     key.style.display = 'none';
 
+ 
 
-
-    function adminShower() {
-        tab.addEventListener('click', function() {
+  tab.addEventListener('click', function() {
             if (tab.innerHTML === "Admin Sign up") {
                 key.style.display = "block";
                 tab.innerHTML = "User Sign up";
@@ -22,18 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 tab.innerHTML = "Admin Sign up";
             }
         });
-    }
+    
 
 
 
 
 
 
-    adminShower();
+
 
 
 
 })
+
 function displayFileName() {
     var input = document.getElementById('file-upload');
     var fileNameDisplay = document.getElementById('file-upload-filename');
