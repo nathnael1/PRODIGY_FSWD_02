@@ -1,5 +1,4 @@
 # PRODIGY_FSWD_02
-# PRODIGY_FSWD_01
 
 ## Overview
 PRODIGY_FSWD_02 is a a web application developed for managing employee records. It provides administrators with CRUD (Create, Read, Update, Delete) operations to handle sensitive employee data securely.
